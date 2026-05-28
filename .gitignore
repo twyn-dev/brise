@@ -7,10 +7,10 @@ build/
 lib/
 coverage/
 
-# test
+# playground
 playground/index.html
 package/
-
+src/scss/playground.scss
 
 # Tool caches
 .cache/
@@ -49,4 +49,4 @@ temp/
 *.tmp
 *.swp
 *.tgz
-_*
+__*
