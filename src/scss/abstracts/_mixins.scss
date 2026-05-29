@@ -1,0 +1,84 @@
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:color';
+@use 'sass:string';
+@use 'sass:list';
+@use 'variables' as *;
+@use 'functions' as *;
+
+/**
+ * Emits container padding and padding offset CSS custom properties.
+ */
+@mixin emit-container-padding-vars {
+	--#{namespace-prefix()}container-padding: #{$container-padding};
+	--#{namespace-prefix()}container-padding-offset: #{-1 * $container-padding};
+}
+
+/**
+ * Emits breakpoint-specific CSS custom properties for container widths.
+ */
+@mixin emit-responsive-container-width-vars {
+	@if $enable-container-class {
+		--#{namespace-prefix()}container-width: 100%;
+
+		@each $breakpoint, $container-width in $container-max-widths {
+			@if not map.has-key($breakpoints, $breakpoint) {
+				@error "Missing breakpoint `#{$breakpoint}` in `grid-breakpoints`.";
+			}
+
+			$_min-width: map.get($breakpoints, $breakpoint);
+
+			@media (min-width: $_min-width) {
+				--#{namespace-prefix()}container-width: #{$container-width};
+			}
+		}
+	}
+}
+
+/**
+ * Applies the default centered container layout.
+
+ * @param {String|Number} $width - Container width value. 
+ */
+
+@mixin make-container($width: var(--#{namespace-prefix()}container-width)) {
+	width: $width;
+	margin-inline: auto;
+	padding-inline: var(--#{namespace-prefix()}container-padding);
+}
+
+/**
+ * Wraps content in a media query built from optional breakpoint, hover, and
+ * pointer conditions.
+ *
+ * If no conditions are provided, the breakpoint does not exist, or the
+ * breakpoint value is `0`, the content is emitted without a min-width query.
+ *
+ * @param {String|null} $breakpoint - Breakpoint key from `$breakpoints`,
+ * usually passed unquoted such as sm, md, or lg.
+ * @param {String|null} $hover - Hover capability, such as `hover` or `none`.
+ * @param {String|null} $pointer - Pointer accuracy, such as `fine` or `coarse`.
+ */
+
+@mixin mq($breakpoint: null, $hover: null, $pointer: null) {
+	$breakpoint-value: get-breakpoint-value($breakpoint);
+
+	@if $breakpoint-value {
+		$query: '(min-width: #{$breakpoint-value})';
+
+		@if $hover {
+			$query: '#{$query} and (hover: #{$hover})';
+		}
+
+		@if $pointer {
+			$query: '#{$query} and (pointer: #{$pointer})';
+		}
+
+		@media #{$query} {
+			@content;
+		}
+	} @else {
+		@content;
+	}
+}

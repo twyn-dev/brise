@@ -1,0 +1,52 @@
+@use '../abstracts' as *;
+@use 'sass:map';
+@use 'sass:list';
+
+/**
+ * Emits the default `.container` class.
+ *
+ * The container uses the shared container width and padding custom properties.
+ */
+
+@if $enable-container-class {
+	.container {
+		@include make-container;
+	}
+}
+
+/**
+ * Emits max-width container variants.
+ *
+ * Each `.container-max-{breakpoint}` class stays full-width until it reaches
+ * its target breakpoint max width.
+ */
+
+@if $enable-container-max-class {
+	$container-width: 100%;
+	$last-breakpoint-key: list.nth(map.keys($container-max-widths), -1);
+
+	@each $target-breakpoint, $target-max-width in $container-max-widths {
+		// Skip the last breakpoint because the default container already covers
+		// it.
+		@if $target-breakpoint != $last-breakpoint-key {
+			.container-max-#{$target-breakpoint} {
+				@include make-container($container-width);
+			}
+
+			// Apply max-widths only up to the target breakpoint.
+			// Example: `.container-max-md` grows through sm and md, but never
+			// beyond md.
+			@each $current-breakpoint,
+				$current-max-width in $container-max-widths
+			{
+				@if $target-max-width >= $current-max-width {
+					@include mq($current-breakpoint) {
+						.container-max-#{$target-breakpoint} {
+							max-width: $current-max-width;
+						}
+					}
+				}
+			}
+		}
+	}
+}

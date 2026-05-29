@@ -1,0 +1,6 @@
+@use '../abstracts/' as *;
+
+:root {
+	@include emit-container-padding-vars;
+	@include emit-responsive-container-width-vars;
+}

@@ -1,0 +1,42 @@
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:color';
+@use 'sass:string';
+@use 'sass:list';
+@use 'variables' as *;
+
+/**
+ * Returns the namespace prefix with a trailing dash.
+ */
+
+@function namespace-prefix() {
+	@if not meta.variable-exists('namespace') {
+		@return '';
+	}
+
+	@if not $namespace or $namespace == '' {
+		@return '';
+	}
+
+	@return '#{$namespace}-';
+}
+
+/**
+ * Returns the breakpoint value for a breakpoint key.
+ *
+ * @param {String} $bp - Breakpoint key, such as `sm`, `md`, or `lg`.
+ * @return {Number|null} Breakpoint value, or `null` when the key does not exist
+ * or the value is 0.
+ */
+
+@function get-breakpoint-value($breakpoint) {
+	@if not map.has-key($breakpoints, $breakpoint) {
+		@warn 'Unknown breakpoint `#{$breakpoint}`. Returning `null`.';
+		@return null;
+	}
+
+	$_breakpoint-value: map.get($breakpoints, $breakpoint);
+
+	@return if(sass($_breakpoint-value != 0): $_breakpoint-value);
+}
