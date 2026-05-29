@@ -1,7 +1,8 @@
 @use '../abstracts/' as *;
 
 :root {
+	@include emit-token-vars('breakpoint', $breakpoints, (xs));
 	@include emit-container-padding-vars;
-	@include emit-responsive-container-width-vars;
 	@include emit-token-vars('radius', $radius);
+	@include emit-responsive-container-width-vars;
 }
