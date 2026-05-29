@@ -17,9 +17,9 @@ and this project adheres to
 ### Added
 
 - Set up the initial library build workflow.
-- Added Vite builds for npm and browser/CDN output.
-- Added SCSS build output for normal and minified CSS.
-- Added linting, formatting, commit hooks, and playground setup.
+- Vite builds for npm and browser/CDN output.
+- SCSS build output for normal and minified CSS.
+- linting, formatting, commit hooks, and playground setup.
 
 [unreleased]: https://github.com/twyn-dev/blank-ui/compare/v0.0.1...HEAD
 [0.0.1]: https://github.com/twyn-dev/blank-ui/releases/tag/v0.0.1
