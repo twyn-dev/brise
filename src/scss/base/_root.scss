@@ -3,4 +3,5 @@
 :root {
 	@include emit-container-padding-vars;
 	@include emit-responsive-container-width-vars;
+	@include emit-token-vars('radius', $radius);
 }

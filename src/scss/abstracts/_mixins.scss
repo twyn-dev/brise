@@ -82,3 +82,26 @@
 		@content;
 	}
 }
+
+/**
+ * Emits CSS custom properties from a token map, prefixed with the namespace
+ * and the given token name.
+ *
+ * Each map entry becomes one custom property in the form
+ * `--{namespace}{name}-{key}: {value}`. Use this for any design-token family
+ * such as radius, border, shadow, spacing, or font-size.
+ *
+ * @param {String} $name - Token family name used as the variable prefix,
+ * such as `radius`, `border`, or `shadow`.
+ * @param {Map} $map - Map of token keys to values, such as
+ * `(sm: 4px, md: 8px, lg: 16px)`.
+ * @param {List} $exclude - Keys to skip, such as `(xs)` for breakpoints
+ * where the value is a sentinel rather than a usable token.
+ */
+@mixin emit-token-vars($name, $map, $exclude: ()) {
+	@each $key, $value in $map {
+		@if not list.index($exclude, $key) {
+			--#{namespace-prefix()}#{$name}-#{$key}: #{$value};
+		}
+	}
+}
