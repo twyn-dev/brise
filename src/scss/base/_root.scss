@@ -6,5 +6,6 @@
 	@include emit-token-vars('radius', $radius);
 	@include emit-token-vars('border', $border);
 	@include emit-token-vars('shadow', $shadow);
+	@include emit-token-vars('font-size', $font-sizes);
 	@include emit-responsive-container-width-vars;
 }
