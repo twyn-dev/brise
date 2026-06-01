@@ -19,3 +19,8 @@ $container-max-widths: (
 	xxl: 1320px
 ) !default;
 $radius: () !default;
+$shadow: (
+	's': 0 1px 2px rgb(0 0 0 / 5%),
+	'm': 0 4px 6px rgb(0 0 0 / 10%),
+	'l': 0 10px 15px rgb(0 0 0 / 15%)
+) !default;

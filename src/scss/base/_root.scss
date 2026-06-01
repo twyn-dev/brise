@@ -4,5 +4,6 @@
 	@include emit-token-vars('breakpoint', $breakpoints);
 	@include emit-container-padding-vars;
 	@include emit-token-vars('radius', $radius);
+	@include emit-token-vars('shadow', $shadow);
 	@include emit-responsive-container-width-vars;
 }
