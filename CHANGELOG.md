@@ -16,6 +16,7 @@ and this project adheres to
 - Box shadow tokens
 - Border tokens
 - Font-size tokens
+- Spacing tokens
 
 ## [0.0.1] - 2026-05-22
 
