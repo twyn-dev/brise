@@ -11,6 +11,9 @@ and this project adheres to
 ### Added
 
 - Container system
+- breakpoints
+- Border radius tokens
+- Box shadow tokens
 
 ## [0.0.1] - 2026-05-22
 
