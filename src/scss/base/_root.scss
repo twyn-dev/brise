@@ -11,6 +11,7 @@
 	@include emit-token-vars('font-size', $font-sizes);
 	@include emit-token-vars('spacing', $spacing-sizes);
 	@include emit-token-vars('line-height', $line-heights);
+	@include emit-token-vars('transition', $transition);
 	@include emit-responsive-container-width-vars;
 }
 
