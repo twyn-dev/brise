@@ -4,6 +4,7 @@
 	@include emit-token-vars('breakpoint', $breakpoints);
 	@include emit-container-padding-vars;
 	@include emit-color-token-vars('color', $colors);
+	@include emit-token-vars('gradient', $gradients);
 	@include emit-token-vars('radius', $radius);
 	@include emit-token-vars('border', $border);
 	@include emit-token-vars('shadow', $shadow);

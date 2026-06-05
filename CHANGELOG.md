@@ -18,6 +18,7 @@ and this project adheres to
 - Font-size tokens
 - Spacing tokens
 - Color tokens
+- Gradient tokens
 
 ## [0.0.1] - 2026-05-22
 
