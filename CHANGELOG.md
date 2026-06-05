@@ -23,6 +23,8 @@ and this project adheres to
 - Transition tokens
 - Font family tokens
 - Letter spacing tokens
+- `fluid()` function for responsive `clamp()` sizing
+- `to-rem()` function to convert px values to rem
 
 ## [0.0.1] - 2026-05-22
 
