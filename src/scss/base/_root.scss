@@ -9,6 +9,7 @@
 	@include emit-token-vars('border', $border);
 	@include emit-token-vars('shadow', $shadow);
 	@include emit-token-vars('font-size', $font-sizes);
+	@include emit-token-vars('font-family', $font-families);
 	@include emit-token-vars('spacing', $spacing-sizes);
 	@include emit-token-vars('line-height', $line-heights);
 	@include emit-token-vars('transition', $transition);
