@@ -20,6 +20,7 @@ and this project adheres to
 - Color tokens
 - Gradient tokens
 - Line height tokens
+- Transition tokens
 
 ## [0.0.1] - 2026-05-22
 
