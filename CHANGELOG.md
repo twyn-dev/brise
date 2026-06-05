@@ -17,6 +17,7 @@ and this project adheres to
 - Border tokens
 - Font-size tokens
 - Spacing tokens
+- Color tokens
 
 ## [0.0.1] - 2026-05-22
 
