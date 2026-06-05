@@ -29,6 +29,7 @@
 		"lint:style": "stylelint \"src/**/*.scss\" --allow-empty-input",
 		"lint:style:fix": "stylelint \"src/**/*.scss\" --fix --allow-empty-input",
 		"lint-staged": "lint-staged",
+		"lint:md": "markdownlint-cli2",
 		"tsx": "tsx",
 		"tsx:watch": "tsx watch",
 		"playground:init": "cp playground/index.sample.html playground/index.html"
@@ -42,6 +43,9 @@
 		],
 		"*.scss": [
 			"stylelint --fix"
+		],
+		"*.md": [
+			"markdownlint-cli2"
 		]
 	},
 	"repository": {
@@ -72,6 +76,7 @@
 		"eslint-config-prettier": "^10.1.8",
 		"husky": "^9.1.7",
 		"lint-staged": "^17.0.4",
+		"markdownlint-cli2": "^0.22.1",
 		"postcss": "^8.5.15",
 		"postcss-cli": "^11.0.1",
 		"postcss-sort-media-queries": "^6.6.1",
