@@ -1,0 +1,133 @@
+@use 'sass:math';
+
+/**
+ * Builds a responsive `clamp()` that scales linearly from `$min-size` at
+ * `$min-viewport` to `$max-size` at `$max-viewport`, then locks at the bounds.
+ *
+ * Works in both directions (growing or shrinking) and can scale against the
+ * viewport or the nearest container.
+ *
+ * @param {Number} $min-size - Lower size bound, in px (unitless).
+ * @param {Number} $max-size - Upper size bound, in px (unitless).
+ * @param {Number} $min-viewport - Viewport width where `$min-size` is reached, in px (unitless).
+ * @param {Number} $max-viewport - Viewport width where `$max-size` is reached, in px (unitless).
+ * @param {String} $threshold-unit ['rem'] - Output unit for the bounds: `'rem'` (scales with font size) or `'px'` (fixed).
+ * @param {String} $relative-to ['viewport'] - Scaling reference: `'viewport'` (vw) or `'container'` (cqi).
+ * @return {String} A `clamp(min, preferred, max)` value.
+ */
+@function fluid(
+	$min-size,
+	$max-size,
+	$min-viewport,
+	$max-viewport,
+	$threshold-unit: 'rem',
+	$relative-to: 'viewport'
+) {
+	@if $threshold-unit != 'rem' and $threshold-unit != 'px' {
+		@error 'Invalid value for $threshold-unit. Expected "rem" or "px".';
+	}
+
+	// Slope of the line: how much the size changes per px of viewport width.
+	$delta-size: $max-size - $min-size;
+	$delta-viewport: $max-viewport - $min-viewport;
+
+	@if $delta-viewport == 0 {
+		@error 'Invalid viewport range. $min-viewport and $max-viewport must differ.';
+	}
+
+	$change: -round-to(math.div($delta-size, $delta-viewport), 6);
+
+	// y-intercept: the size at viewport width 0 (the constant term of the line).
+	$intercept: $max-size - ($max-viewport * $change);
+	$preferred: if(
+		sass($threshold-unit == 'rem'): -px-to-rem($intercept, 4) ;
+			else: -round-to($intercept, 4) * 1px
+	);
+
+	// Viewport-dependent term: slope expressed as a % of the chosen reference.
+	$rate-of-change: null;
+
+	@if $relative-to == 'viewport' {
+		$rate-of-change: math.abs(-round-to(100vw * $change));
+	} @else if $relative-to == 'container' {
+		$rate-of-change: math.abs(-round-to(100cqi * $change));
+	} @else {
+		@error 'Invalid value for $relative-to. Expected "viewport" or "container".';
+	}
+
+	// Convert the bounds to the chosen output unit.
+	$precision: 4;
+	$min-size: if(
+		sass($threshold-unit == 'rem'): -px-to-rem($min-size, $precision) ;
+			else: $min-size * 1px
+	);
+	$max-size: if(
+		sass($threshold-unit == 'rem'): -px-to-rem($max-size, $precision) ;
+			else: $max-size * 1px
+	);
+
+	// clamp() requires min <= max, so for a shrinking size swap the bounds.
+	$should-swap: $min-size > $max-size;
+
+	@if $should-swap {
+		$temp: $min-size;
+		$min-size: $max-size;
+		$max-size: $temp;
+	}
+
+	// When shrinking, the rate is subtracted from the (larger) intercept.
+	$preferred-value: #{$preferred} #{if(sass($should-swap): '-' ; else: '+')}
+		#{$rate-of-change};
+
+	@return clamp(#{$min-size}, #{$preferred-value}, #{$max-size});
+}
+
+/**
+ * Converts a pixel value to rem units using a 16px base.
+ *
+ * @param {Number} $value - Pixel value (with or without unit).
+ * @param {Number} $precision [3] - Number of decimal places to round to.
+ * @return {Number} The value in rem.
+ */
+@function to-rem($value, $precision: 3) {
+	@return -px-to-rem($value, $precision);
+}
+
+/**
+ * Converts a pixel value to rem units using a 16px base.
+ *
+ * @param {Number} $value - Pixel value (with or without unit).
+ * @param {Number} $precision [3] - Number of decimal places to round to.
+ * @return {Number} The value in rem.
+ */
+@function -px-to-rem($value, $precision: 3) {
+	$base-font-size: 16;
+	$_value: if(
+		sass(math.is-unitless($value)): $value; else: -strip-unit($value)
+	);
+
+	@return -round-to(math.div($_value, $base-font-size), $precision) * 1rem;
+}
+
+/**
+ * Rounds a number to a fixed decimal precision. Preserves the unit, if any.
+ *
+ * @param {Number} $number - The number to round.
+ * @param {Number} $precision [4] - Number of decimal places to keep.
+ * @return {Number} The rounded number.
+ */
+@function -round-to($number, $precision: 4) {
+	$factor: math.pow(10, $precision);
+
+	@return math.div(math.round($number * $factor), $factor);
+}
+
+/**
+ * Removes the unit from a numeric Sass value, returning a unitless number.
+ *
+ * @param {Number} $value - A value carrying a unit (e.g. `16px`).
+ * @return {Number} The numeric value without its unit (e.g. `16`).
+ */
+@function -strip-unit($value) {
+	@return math.div($value, $value * 0 + 1);
+}
