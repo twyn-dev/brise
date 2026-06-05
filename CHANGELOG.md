@@ -22,6 +22,7 @@ and this project adheres to
 - Line height tokens
 - Transition tokens
 - Font family tokens
+- Letter spacing tokens
 
 ## [0.0.1] - 2026-05-22
 
