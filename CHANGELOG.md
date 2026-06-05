@@ -19,6 +19,7 @@ and this project adheres to
 - Spacing tokens
 - Color tokens
 - Gradient tokens
+- Line height tokens
 
 ## [0.0.1] - 2026-05-22
 
