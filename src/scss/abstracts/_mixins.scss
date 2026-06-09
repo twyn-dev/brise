@@ -166,6 +166,8 @@
  * where the value is a sentinel rather than a usable token.
  */
 @mixin emit-token-vars($name, $map, $exclude: ()) {
+	$_name: if(sass($name != null and $name != ""): "#{$name}-"; else: "");
+
 	@each $key, $value in $map {
 		@if not list.index($exclude, $key) {
 			--#{namespace-prefix()}#{$name}-#{$key}: #{$value};
