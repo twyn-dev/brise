@@ -65,7 +65,8 @@
 	},
 	"homepage": "https://github.com/twyn-dev/blank-ui#readme",
 	"engines": {
-		"node": ">=24"
+		"node": ">=24",
+		"npm": ">=11.7"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^21.0.1",
