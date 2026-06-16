@@ -1,7 +1,7 @@
 {
-	"name": "blank-ui",
+	"name": "brise",
 	"version": "0.0.1",
-	"description": "Unstyled, accessible UI components.",
+	"description": "A lightweight frontend toolkit for unstyled, accessible components, design tokens, utility classes, and SCSS helpers.",
 	"module": "./dist/index.js",
 	"exports": {
 		".": "./dist/index.js",
@@ -15,11 +15,11 @@
 	"scripts": {
 		"build:js": "vite build",
 		"build:cdn": "vite build --mode cdn && vite build --mode cdn-min",
-		"build:css": "sass src/scss/style.scss dist/blank-ui.css --style=expanded --no-source-map && sass src/scss/style.scss dist/blank-ui.min.css --style=compressed --no-source-map",
-		"build:css:postcss": "postcss dist/blank-ui.css -o dist/blank-ui.css --no-map && postcss dist/blank-ui.min.css --env min -o dist/blank-ui.min.css --no-map",
+		"build:css": "sass src/scss/style.scss dist/brise.css --style=expanded --no-source-map && sass src/scss/style.scss dist/brise.min.css --style=compressed --no-source-map",
+		"build:css:postcss": "postcss dist/brise.css -o dist/brise.css --no-map && postcss dist/brise.min.css --env min -o dist/brise.min.css --no-map",
 		"build:css:all": "npm run build:css && npm run build:css:postcss",
 		"build": "npm run build:js && npm run build:cdn && npm run build:css:all",
-		"sass:watch": "sass src/scss/style.scss dist/blank-ui.css --watch",
+		"sass:watch": "sass src/scss/style.scss dist/brise.css --watch",
 		"sass:watch:playground": "sass src/scss/playground.scss __/playground.css --no-source-map  --watch",
 		"dev": "vite",
 		"preview": "vite preview",
@@ -50,7 +50,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/twyn-dev/blank-ui.git"
+		"url": "git+https://github.com/twyn-dev/brise.git"
 	},
 	"keywords": [
 		"ui components",
@@ -61,9 +61,9 @@
 	"license": "MIT",
 	"type": "module",
 	"bugs": {
-		"url": "https://github.com/twyn-dev/blank-ui/issues"
+		"url": "https://github.com/twyn-dev/brise/issues"
 	},
-	"homepage": "https://github.com/twyn-dev/blank-ui#readme",
+	"homepage": "https://github.com/twyn-dev/brise#readme",
 	"engines": {
 		"node": ">=24",
 		"npm": ">=11.7"

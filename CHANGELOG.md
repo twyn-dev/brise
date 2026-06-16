@@ -35,5 +35,5 @@ and this project adheres to
 - SCSS build output for normal and minified CSS.
 - linting, formatting, commit hooks, and playground setup.
 
-[unreleased]: https://github.com/twyn-dev/blank-ui/compare/v0.0.1...HEAD
-[0.0.1]: https://github.com/twyn-dev/blank-ui/releases/tag/v0.0.1
+[unreleased]: https://github.com/twyn-dev/brise/compare/v0.0.1...HEAD
+[0.0.1]: https://github.com/twyn-dev/brise/releases/tag/v0.0.1
