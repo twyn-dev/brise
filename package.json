@@ -66,7 +66,7 @@
 	"homepage": "https://github.com/twyn-dev/brise#readme",
 	"engines": {
 		"node": ">=24",
-		"npm": ">=11.7"
+		"npm": ">=11"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^21.0.1",
