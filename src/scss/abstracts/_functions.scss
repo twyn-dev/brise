@@ -30,13 +30,13 @@
  * @return {Number|null} Breakpoint value, or `null` when the key does not exist
  * or the value is 0.
  */
-@function get-breakpoint-value($breakpoint) {
-	@if not map.has-key($breakpoints, $breakpoint) {
+@function get-breakpoint-value($breakpoint-key) {
+	@if not map.has-key($breakpoint, $breakpoint-key) {
 		@warn 'Unknown breakpoint `#{$breakpoint}`. Returning `null`.';
 		@return null;
 	}
 
-	$_breakpoint-value: map.get($breakpoints, $breakpoint);
+	$_breakpoint-value: map.get($breakpoint, $breakpoint-key);
 
 	@return if(sass($_breakpoint-value != 0): $_breakpoint-value);
 }

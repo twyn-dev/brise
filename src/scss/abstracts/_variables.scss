@@ -2,7 +2,7 @@ $namespace: 'brise';
 $enable-container-class: true !default;
 $enable-container-max-class: true !default;
 $container-padding: 12px !default;
-$breakpoints: (
+$breakpoint: (
 	xxs: 0,
 	xs: 375px,
 	sm: 576px,
@@ -11,22 +11,22 @@ $breakpoints: (
 	xl: 1200px,
 	xxl: 1400px
 ) !default;
-$container-max-widths: (
+$container-max-width: (
 	sm: 540px,
 	md: 720px,
 	lg: 960px,
 	xl: 1140px,
 	xxl: 1320px
 ) !default;
-$colors: () !default;
-$gradients: () !default;
+$color: () !default;
+$gradient: () !default;
 $default-color-theme: default !default;
 $radius: () !default;
 $border: () !default;
 $shadow: () !default;
-$font-sizes: () !default;
-$font-families: () !default;
-$letter-spacings: () !default;
-$spacing-sizes: () !default;
-$line-heights: () !default;
-$transition: () !default;
+$text: () !default;
+$font: () !default;
+$tracking: () !default;
+$spacing: () !default;
+$leading: () !default;
+$ease: () !default;
