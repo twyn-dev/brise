@@ -23,9 +23,9 @@
 
 @if $enable-container-max-class {
 	$container-width: 100%;
-	$last-breakpoint-key: list.nth(map.keys($container-max-widths), -1);
+	$last-breakpoint-key: list.nth(map.keys($container-max-width), -1);
 
-	@each $target-breakpoint, $target-max-width in $container-max-widths {
+	@each $target-breakpoint, $target-max-width in $container-max-width {
 		// Skip the last breakpoint because the default container already covers
 		// it.
 		@if $target-breakpoint != $last-breakpoint-key {
@@ -37,7 +37,7 @@
 			// Example: `.container-max-md` grows through sm and md, but never
 			// beyond md.
 			@each $current-breakpoint,
-				$current-max-width in $container-max-widths
+				$current-max-width in $container-max-width
 			{
 				@if $target-max-width >= $current-max-width {
 					@include mq($current-breakpoint) {

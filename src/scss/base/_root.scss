@@ -1,20 +1,20 @@
 @use '../abstracts/' as *;
 
 :root {
-	@include emit-token-vars('breakpoint', $breakpoints);
+	@include emit-token-vars('breakpoint', $breakpoint);
 	@include emit-container-padding-vars;
-	@include emit-color-token-vars('color', $colors);
-	@include emit-token-vars('gradient', $gradients);
+	@include emit-color-token-vars('color', $color);
+	@include emit-token-vars('gradient', $gradient);
 	@include emit-token-vars('radius', $radius);
 	@include emit-token-vars('border', $border);
 	@include emit-token-vars('shadow', $shadow);
-	@include emit-token-vars('font-size', $font-sizes);
-	@include emit-token-vars('font-family', $font-families);
-	@include emit-token-vars('letter-spacing', $letter-spacings);
-	@include emit-token-vars('spacing', $spacing-sizes);
-	@include emit-token-vars('line-height', $line-heights);
-	@include emit-token-vars('transition', $transition);
+	@include emit-token-vars('text', $text);
+	@include emit-token-vars('font', $font);
+	@include emit-token-vars('tracking', $tracking);
+	@include emit-token-vars('spacing', $spacing);
+	@include emit-token-vars('leading', $leading);
+	@include emit-token-vars('ease', $ease);
 	@include emit-responsive-container-width-vars;
 }
 
-@include emit-color-theme-overrides('color', $colors);
+@include emit-color-theme-overrides('color', $color);
