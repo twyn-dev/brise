@@ -32,7 +32,7 @@
 		"lint:md": "markdownlint-cli2",
 		"tsx": "tsx",
 		"tsx:watch": "tsx watch",
-		"playground:init": "cp playground/index.sample.html playground/index.html"
+		"playground:init": "node scripts/init-playground.js"
 	},
 	"lint-staged": {
 		"*.{ts,json,scss,md}": [
