@@ -1,4 +1,4 @@
-import { copyFile, access } from 'node:fs/promises';
+import { copyFile, access, writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -6,14 +6,17 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 const root = path.resolve(dirname, '..');
 
-const files = [
+const filesToCopy = [
 	{
 		from: 'playground/index.sample.html',
 		to: 'playground/index.html'
-	},
+	}
+];
+
+const filesToCreate = [
 	{
-		from: 'src/scss/playground.sample.scss',
-		to: 'src/scss/playground.scss'
+		to: 'src/scss/playground.scss',
+		content: ''
 	}
 ];
 
@@ -26,7 +29,7 @@ const fileExists = async (filePath) => {
 	}
 };
 
-for (const file of files) {
+for (const file of filesToCopy) {
 	const source = path.join(root, file.from);
 	const target = path.join(root, file.to);
 
@@ -40,6 +43,20 @@ for (const file of files) {
 		continue;
 	}
 
+	await mkdir(path.dirname(target), { recursive: true });
 	await copyFile(source, target);
+	console.log(`Created: ${file.to}`);
+}
+
+for (const file of filesToCreate) {
+	const target = path.join(root, file.to);
+
+	if (await fileExists(target)) {
+		console.log(`Skipped: ${file.to} already exists.`);
+		continue;
+	}
+
+	await mkdir(path.dirname(target), { recursive: true });
+	await writeFile(target, file.content);
 	console.log(`Created: ${file.to}`);
 }
