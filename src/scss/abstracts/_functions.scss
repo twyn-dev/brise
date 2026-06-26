@@ -6,11 +6,10 @@
 @use 'sass:list';
 @use 'variables' as *;
 
-/**
- * Returns the namespace prefix with a trailing dash.
- *
- * @return {String} Namespace prefix, or an empty string when disabled.
- */
+/// Returns the namespace prefix with a trailing dash.
+///
+/// @return {String} Namespace prefix, or an empty string when disabled.
+
 @function namespace-prefix() {
 	@if not meta.variable-exists('namespace') {
 		@return '';
@@ -23,13 +22,12 @@
 	@return '#{$namespace}-';
 }
 
-/**
- * Returns the breakpoint value for a breakpoint key.
- *
- * @param {String} $breakpoint - Breakpoint key, such as `sm`, `md`, or `lg`.
- * @return {Number|null} Breakpoint value, or `null` when the key does not exist
- * or the value is 0.
- */
+/// Returns the breakpoint value for a breakpoint key.
+///
+/// @param {String} $breakpoint - Breakpoint key, such as `sm`, `md`, or `lg`.
+/// @return {Number|null} Breakpoint value, or `null` when the key does not exist
+/// or the value is 0.
+
 @function get-breakpoint-value($breakpoint-key) {
 	@if not map.has-key($breakpoint, $breakpoint-key) {
 		@warn 'Unknown breakpoint `#{$breakpoint}`. Returning `null`.';
@@ -41,15 +39,14 @@
 	@return if(sass($_breakpoint-value != 0): $_breakpoint-value);
 }
 
-/**
- * Normalizes a color token map into a map of named themes.
- *
- * Flat color entries become the `default` theme. Nested maps are treated as
- * named themes and are preserved as-is.
- *
- * @param {Map} $colors - Flat color token map or map of color theme maps.
- * @return {Map} Color themes keyed by theme name.
- */
+/// Normalizes a color token map into a map of named themes.
+///
+/// Flat color entries become the `default` theme. Nested maps are treated as
+/// named themes and are preserved as-is.
+///
+/// @param {Map} $colors - Flat color token map or map of color theme maps.
+/// @return {Map} Color themes keyed by theme name.
+
 @function normalize-color-themes($colors) {
 	$default: ();
 	$themes: ();

@@ -1,20 +1,18 @@
 @use 'sass:math';
 
-/**
- * Builds a responsive `clamp()` that scales linearly from `$min-size` at
- * `$min-viewport` to `$max-size` at `$max-viewport`, then locks at the bounds.
- *
- * Works in both directions (growing or shrinking) and can scale against the
- * viewport or the nearest container.
- *
- * @param {Number} $min-size - Lower size bound, in px (unitless).
- * @param {Number} $max-size - Upper size bound, in px (unitless).
- * @param {Number} $min-viewport - Viewport width where `$min-size` is reached, in px (unitless).
- * @param {Number} $max-viewport - Viewport width where `$max-size` is reached, in px (unitless).
- * @param {String} $threshold-unit ['rem'] - Output unit for the bounds: `'rem'` (scales with font size) or `'px'` (fixed).
- * @param {String} $relative-to ['viewport'] - Scaling reference: `'viewport'` (vw) or `'container'` (cqi).
- * @return {String} A `clamp(min, preferred, max)` value.
- */
+/// Builds a responsive `clamp()` that scales linearly from `$min-size` at
+/// `$min-viewport` to `$max-size` at `$max-viewport`, then locks at the bounds.
+/// Works in both directions (growing or shrinking) and can scale against the
+/// viewport or the nearest container.
+///
+/// @param {Number} $min-size - Lower size bound, in px (unitless).
+/// @param {Number} $max-size - Upper size bound, in px (unitless).
+/// @param {Number} $min-viewport - Viewport width where `$min-size` is reached, in px (unitless).
+/// @param {Number} $max-viewport - Viewport width where `$max-size` is reached, in px (unitless).
+/// @param {String} $threshold-unit ['rem'] - Output unit for the bounds: `'rem'` (scales with font size) or `'px'` (fixed).
+/// @param {String} $relative-to ['viewport'] - Scaling reference: `'viewport'` (vw) or `'container'` (cqi).
+/// @return {String} A `clamp(min, preferred, max)` value.
+
 @function fluid(
 	$min-size,
 	$max-size,
@@ -82,24 +80,22 @@
 	@return clamp(#{$min-size}, #{$preferred-value}, #{$max-size});
 }
 
-/**
- * Converts a pixel value to rem units using a 16px base.
- *
- * @param {Number} $value - Pixel value (with or without unit).
- * @param {Number} $precision [3] - Number of decimal places to round to.
- * @return {Number} The value in rem.
- */
+/// Converts a pixel value to rem units using a 16px base.
+///
+/// @param {Number} $value - Pixel value (with or without unit).
+/// @param {Number} $precision [3] - Number of decimal places to round to.
+/// @return {Number} The value in rem.
+
 @function to-rem($value, $precision: 3) {
 	@return -px-to-rem($value, $precision);
 }
 
-/**
- * Converts a pixel value to rem units using a 16px base.
- *
- * @param {Number} $value - Pixel value (with or without unit).
- * @param {Number} $precision [3] - Number of decimal places to round to.
- * @return {Number} The value in rem.
- */
+/// Converts a pixel value to rem units using a 16px base.
+///
+/// @param {Number} $value - Pixel value (with or without unit).
+/// @param {Number} $precision [3] - Number of decimal places to round to.
+/// @return {Number} The value in rem.
+
 @function -px-to-rem($value, $precision: 3) {
 	$base-font-size: 16;
 	$_value: if(
@@ -109,25 +105,23 @@
 	@return -round-to(math.div($_value, $base-font-size), $precision) * 1rem;
 }
 
-/**
- * Rounds a number to a fixed decimal precision. Preserves the unit, if any.
- *
- * @param {Number} $number - The number to round.
- * @param {Number} $precision [4] - Number of decimal places to keep.
- * @return {Number} The rounded number.
- */
+/// Rounds a number to a fixed decimal precision. Preserves the unit, if any.
+///
+/// @param {Number} $number - The number to round.
+/// @param {Number} $precision [4] - Number of decimal places to keep.
+/// @return {Number} The rounded number.
+
 @function -round-to($number, $precision: 4) {
 	$factor: math.pow(10, $precision);
 
 	@return math.div(math.round($number * $factor), $factor);
 }
 
-/**
- * Removes the unit from a numeric Sass value, returning a unitless number.
- *
- * @param {Number} $value - A value carrying a unit (e.g. `16px`).
- * @return {Number} The numeric value without its unit (e.g. `16`).
- */
+/// Removes the unit from a numeric Sass value, returning a unitless number.
+///
+/// @param {Number} $value - A value carrying a unit (e.g. `16px`).
+/// @return {Number} The numeric value without its unit (e.g. `16`).
+
 @function -strip-unit($value) {
 	@return math.div($value, $value * 0 + 1);
 }
