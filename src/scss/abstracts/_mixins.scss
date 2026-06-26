@@ -7,17 +7,15 @@
 @use 'variables' as *;
 @use 'functions' as *;
 
-/**
- * Emits container padding and padding offset CSS custom properties.
- */
+/// Emits container padding and padding offset CSS custom properties.
+
 @mixin emit-container-padding-vars {
 	--#{namespace-prefix()}container-padding: #{$container-padding};
 	--#{namespace-prefix()}container-padding-offset: #{-1 * $container-padding};
 }
 
-/**
- * Emits breakpoint-specific CSS custom properties for container widths.
- */
+/// Emits breakpoint-specific CSS custom properties for container widths.
+
 @mixin emit-responsive-container-width-vars {
 	@if $enable-container-class {
 		--#{namespace-prefix()}container-width: 100%;
@@ -36,29 +34,27 @@
 	}
 }
 
-/**
- * Applies the default centered container layout.
- *
- * @param {String|Number} $width - Container width value.
- */
+/// Applies the default centered container layout.
+///
+/// @param {String|Number} $width - Container width value.
+
 @mixin make-container($width: var(--#{namespace-prefix()}container-width)) {
 	width: $width;
 	margin-inline: auto;
 	padding-inline: var(--#{namespace-prefix()}container-padding);
 }
 
-/**
- * Wraps content in a media query built from optional breakpoint, hover, and
- * pointer conditions.
- *
- * If no conditions are provided, the breakpoint-key does not exist, or the
- * breakpoint value is `0`, the content is emitted without a min-width query.
- *
- * @param {String|null} $breakpoint-key - Breakpoint key from `$breakpoint`,
- * usually passed unquoted such as sm, md, or lg.
- * @param {String|null} $hover - Hover capability, such as `hover` or `none`.
- * @param {String|null} $pointer - Pointer accuracy, such as `fine` or `coarse`.
- */
+/// Wraps content in a media query built from optional breakpoint, hover, and
+/// pointer conditions.
+///
+/// If no conditions are provided, the breakpoint-key does not exist, or the
+/// breakpoint value is `0`, the content is emitted without a min-width query.
+///
+/// @param {String|null} $breakpoint-key - Breakpoint key from `$breakpoint`,
+/// usually passed unquoted such as sm, md, or lg.
+/// @param {String|null} $hover - Hover capability, such as `hover` or `none`.
+/// @param {String|null} $pointer - Pointer accuracy, such as `fine` or `coarse`.
+
 @mixin mq($breakpoint-key: null, $hover: null, $pointer: null) {
 	$breakpoint-value: get-breakpoint-value($breakpoint-key);
 
@@ -81,16 +77,15 @@
 	}
 }
 
-/**
- * Emits CSS custom properties for the default color theme.
- *
- * The source map may be flat or grouped by theme. The configured default theme
- * is emitted at the call site, usually inside `:root`.
- *
- * @param {String} $name - Token family name used as the variable prefix.
- * @param {Map} $colors - Flat color token map or map of color theme maps.
- * @param {String|null} $theme - Theme key to emit as the default theme.
- */
+/// Emits CSS custom properties for the default color theme.
+///
+/// The source map may be flat or grouped by theme. The configured default theme
+/// is emitted at the call site, usually inside `:root`.
+///
+/// @param {String} $name - Token family name used as the variable prefix.
+/// @param {Map} $colors - Flat color token map or map of color theme maps.
+/// @param {String|null} $theme - Theme key to emit as the default theme.
+
 @mixin emit-color-token-vars($name, $colors, $theme: $default-color-theme) {
 	$themes: normalize-color-themes($colors);
 
@@ -116,16 +111,15 @@
 	}
 }
 
-/**
- * Emits selector-scoped CSS custom property overrides for color themes.
- *
- * Each non-default theme is emitted under `[data-{namespace}theme='{theme}']`
- * so consumers can decide whether the theme applies globally or to a scope.
- *
- * @param {String} $name - Token family name used as the variable prefix.
- * @param {Map} $colors - Flat color token map or map of color theme maps.
- * @param {String|null} $theme - Theme key to omit because it is emitted by default.
- */
+/// Emits selector-scoped CSS custom property overrides for color themes.
+///
+/// Each non-default theme is emitted under `[data-{namespace}theme='{theme}']`
+/// so consumers can decide whether the theme applies globally or to a scope.
+///
+/// @param {String} $name - Token family name used as the variable prefix.
+/// @param {Map} $colors - Flat color token map or map of color theme maps.
+/// @param {String|null} $theme - Theme key to omit because it is emitted by default.
+
 @mixin emit-color-theme-overrides(
 	$name,
 	$colors,
@@ -150,21 +144,20 @@
 	}
 }
 
-/**
- * Emits CSS custom properties from a token map, prefixed with the namespace
- * and the given token name.
- *
- * Each map entry becomes one custom property in the form
- * `--{namespace}{name}-{key}: {value}`. Use this for any design-token family
- * such as radius, border, shadow, spacing, or font-size.
- *
- * @param {String} $name - Token family name used as the variable prefix,
- * such as `radius`, `border`, or `shadow`.
- * @param {Map} $map - Map of token keys to values, such as
- * `(sm: 4px, md: 8px, lg: 16px)`.
- * @param {List} $exclude - Keys to skip, such as `(xs)` for breakpoint-key
- * where the value is a sentinel rather than a usable token.
- */
+/// Emits CSS custom properties from a token map, prefixed with the namespace
+/// and the given token name.
+///
+/// Each map entry becomes one custom property in the form
+/// `--{namespace}{name}-{key}: {value}`. Use this for any design-token family
+/// such as radius, border, shadow, spacing, or font-size.
+///
+/// @param {String} $name - Token family name used as the variable prefix,
+/// such as `radius`, `border`, or `shadow`.
+/// @param {Map} $map - Map of token keys to values, such as
+/// `(sm: 4px, md: 8px, lg: 16px)`.
+/// @param {List} $exclude - Keys to skip, such as `(xs)` for breakpoint-key
+/// where the value is a sentinel rather than a usable token.
+
 @mixin emit-token-vars($name, $map, $exclude: ()) {
 	$_name: if(sass($name != null and $name != ''): '#{$name}-' ; else: '');
 

@@ -2,11 +2,9 @@
 @use 'sass:map';
 @use 'sass:list';
 
-/**
- * Emits the default `.container` class.
- *
- * The container uses the shared container width and padding custom properties.
- */
+/// Emits the default `.container` class.
+///
+/// The container uses the shared container width and padding custom properties.
 
 @if $enable-container-class {
 	.container {
@@ -14,12 +12,10 @@
 	}
 }
 
-/**
- * Emits max-width container variants.
- *
- * Each `.container-max-{breakpoint}` class stays full-width until it reaches
- * its target breakpoint max width.
- */
+/// Emits max-width container variants.
+///
+/// Each `.container-max-{breakpoint}` class stays full-width until it reaches
+/// its target breakpoint max width.
 
 @if $enable-container-max-class {
 	$container-width: 100%;
