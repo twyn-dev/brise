@@ -1,0 +1,76 @@
+@use '../abstracts' as *;
+
+/// Generates the Brise grid system when enabled.
+///
+/// Includes:
+/// - `.grid-layout` as the main grid wrapper
+/// - `.g-col-*` column span utilities
+/// - `.g-col-full` for full-width grid items
+/// - responsive breakpoint variants like `.md:g-col-6`
+@if $enable-grid-system {
+	.grid-layout {
+		display: grid;
+		grid-template-columns: repeat($grid-columns, minmax(0, 1fr));
+
+		// Add optional row gap.
+		@if $grid-row-gap {
+			row-gap: $grid-row-gap;
+		}
+
+		// Add optional column gap.
+		@if $grid-column-gap {
+			column-gap: $grid-column-gap;
+		}
+
+		// Neutralize the parent container padding when needed.
+		@if $grid-container-offset {
+			margin-inline: calc($grid-container-offset * -1);
+		}
+	}
+
+	// Generate `.g-col-1` through `.g-col-#{$grid-columns}`.
+	@for $i from 1 through $grid-columns {
+		.g-col-#{$i} {
+			grid-column: span #{$i} / span #{$i};
+
+			@if $grid-column-padding {
+				padding-inline: $grid-column-padding;
+			}
+		}
+	}
+
+	// Generate a full-width column utility that is independent of the column count.
+	.g-col-full {
+		grid-column: 1 / -1;
+
+		@if $grid-column-padding {
+			padding-inline: $grid-column-padding;
+		}
+	}
+
+	// Generate responsive variants like `.md:g-col-6`.
+	// The zero breakpoint is skipped because base classes are the default state.
+	@each $breakpoint-name, $breakpoint-value in $breakpoint {
+		@if $breakpoint-value != 0 {
+			@media (min-width: $breakpoint-value) {
+				@for $i from 1 through $grid-columns {
+					.#{$breakpoint-name}\:g-col-#{$i} {
+						grid-column: span #{$i} / span #{$i};
+
+						@if $grid-column-padding {
+							padding-inline: $grid-column-padding;
+						}
+					}
+				}
+
+				.#{$breakpoint-name}\:g-col-full {
+					grid-column: 1 / -1;
+
+					@if $grid-column-padding {
+						padding-inline: $grid-column-padding;
+					}
+				}
+			}
+		}
+	}
+}
