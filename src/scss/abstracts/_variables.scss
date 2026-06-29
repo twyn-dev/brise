@@ -8,7 +8,7 @@ $grid-column-gap: 1rem !default;
 $grid-row-gap: null !default;
 $grid-container-offset: 12px !default;
 $grid-column-padding: 12px !default;
-$breakpoint: (
+$breakpoints: (
 	xxs: 0,
 	xs: 375px,
 	sm: 576px,
@@ -17,7 +17,7 @@ $breakpoint: (
 	xl: 1200px,
 	xxl: 1400px
 ) !default;
-$container-max-width: (
+$container-max-widths: (
 	sm: 540px,
 	md: 720px,
 	lg: 960px,

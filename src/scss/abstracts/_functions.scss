@@ -24,17 +24,17 @@
 
 /// Returns the breakpoint value for a breakpoint key.
 ///
-/// @param {String} $breakpoint - Breakpoint key, such as `sm`, `md`, or `lg`.
+/// @param {String} $breakpoints - Breakpoint key, such as `sm`, `md`, or `lg`.
 /// @return {Number|null} Breakpoint value, or `null` when the key does not exist
 /// or the value is 0.
 
 @function get-breakpoint-value($breakpoint-key) {
-	@if not map.has-key($breakpoint, $breakpoint-key) {
-		@warn 'Unknown breakpoint `#{$breakpoint}`. Returning `null`.';
+	@if not map.has-key($breakpoints, $breakpoint-key) {
+		@warn 'Unknown breakpoint `#{$breakpoints}`. Returning `null`.';
 		@return null;
 	}
 
-	$_breakpoint-value: map.get($breakpoint, $breakpoint-key);
+	$_breakpoint-value: map.get($breakpoints, $breakpoint-key);
 
 	@return if(sass($_breakpoint-value != 0): $_breakpoint-value);
 }

@@ -50,7 +50,7 @@
 
 	// Generate responsive variants like `.md:g-col-6`.
 	// The zero breakpoint is skipped because base classes are the default state.
-	@each $breakpoint-name, $breakpoint-value in $breakpoint {
+	@each $breakpoint-name, $breakpoint-value in $breakpoints {
 		@if $breakpoint-value != 0 {
 			@media (min-width: $breakpoint-value) {
 				@for $i from 1 through $grid-columns {
