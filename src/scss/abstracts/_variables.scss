@@ -2,6 +2,12 @@ $namespace: 'brise';
 $enable-container-class: true !default;
 $enable-container-max-class: true !default;
 $container-padding: 12px !default;
+$enable-grid-system: true !default;
+$grid-columns: 12 !default;
+$grid-column-gap: 1rem !default;
+$grid-row-gap: null !default;
+$grid-container-offset: 12px !default;
+$grid-column-padding: 12px !default;
 $breakpoint: (
 	xxs: 0,
 	xs: 375px,
