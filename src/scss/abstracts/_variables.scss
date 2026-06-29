@@ -2,7 +2,7 @@ $namespace: 'brise';
 $enable-container-class: true !default;
 $enable-container-max-class: true !default;
 $container-padding: 12px !default;
-$breakpoint: (
+$breakpoints: (
 	xxs: 0,
 	xs: 375px,
 	sm: 576px,
@@ -11,7 +11,7 @@ $breakpoint: (
 	xl: 1200px,
 	xxl: 1400px
 ) !default;
-$container-max-width: (
+$container-max-widths: (
 	sm: 540px,
 	md: 720px,
 	lg: 960px,
