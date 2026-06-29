@@ -1,7 +1,7 @@
 @use '../abstracts/' as *;
 
 :root {
-	@include emit-token-vars('breakpoint', $breakpoints);
+	@include emit-token-vars('breakpoint', $breakpoint);
 	@include emit-container-padding-vars;
 	@include emit-color-token-vars('color', $color);
 	@include emit-token-vars('gradient', $gradient);
