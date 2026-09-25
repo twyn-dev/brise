@@ -74,3 +74,68 @@
 
 	@return $themes;
 }
+
+@function get-breakpoint-prefix($breakpoint-key) {
+	$_breakpoint-value: get-breakpoint-value($breakpoint-key);
+
+	@if not $_breakpoint-value {
+		@return '';
+	}
+
+	@if $_breakpoint-value > 0 {
+		@return '#{$breakpoint-key}\\:';
+	} @else {
+		@return '';
+	}
+}
+
+@function list-to-map($list) {
+	$result: ();
+
+	@each $item in $list {
+		$result: map.merge(
+			$result,
+			(
+				$item: $item
+			)
+		);
+	}
+
+	@return $result;
+}
+
+@function normalize-values($values) {
+	@if not $values {
+		@error "`values` must not be null.";
+	}
+
+	@if meta.type-of($values) == 'string' and $values == '' {
+		@error "`values` must not be an empty string.";
+	}
+
+	@if meta.type-of($values) == 'map' {
+		@return $values;
+	}
+
+	@if meta.type-of($values) == 'list' {
+		@return list-to-map($values);
+	}
+
+	@return ($values: $values);
+}
+
+@function require-key($map, $key, $context: 'Map') {
+	@if not map.has-key($map, $key) {
+		@error "#{$context} is missing required key `#{$key}`.";
+	}
+
+	@return map.get($map, $key);
+}
+
+@function normalize-class($class, $default) {
+	@if not $class or $class == '' {
+		@return $default;
+	}
+
+	@return $class;
+}

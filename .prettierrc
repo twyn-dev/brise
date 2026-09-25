@@ -1,5 +1,5 @@
 {
-	"printWidth": 80,
+	"printWidth": 120,
 	"tabWidth": 4,
 	"useTabs": true,
 	"singleQuote": true,
@@ -18,9 +18,11 @@
 		},
 		{
 			"files": ["*.md"],
+
 			"options": {
 				"tabWidth": 2,
-				"proseWrap": "always"
+				"proseWrap": "always",
+				"printWidth": 80
 			}
 		}
 	]
