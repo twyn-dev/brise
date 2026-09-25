@@ -1,0 +1,98 @@
+@use 'variables' as *;
+@use 'sass:map';
+
+$default-utilities: (
+	'display': (
+		responsive: true,
+		property: display,
+		values: (
+			block: block,
+			inline: inline,
+			inline-block: inline-block,
+			flex: flex,
+			grid: grid,
+			inline-flex: inline-flex,
+			inline-grid: inline-grid,
+			contents: contents,
+			flow-root: flow-root,
+			hidden: none
+		)
+	),
+	'text-align': (
+		responsive: true,
+		property: text-align,
+		class: text,
+		values: left center right justify start end
+	),
+	'overflow': (
+		responsive: true,
+		property: overflow,
+		class: overflow,
+		values: auto hidden clip visible scroll
+	),
+	'overflow-x': (
+		responsive: true,
+		property: overflow-x,
+		values: auto hidden clip visible scroll
+	),
+	'overflow-y': (
+		responsive: true,
+		property: overflow-y,
+		values: auto hidden clip visible scroll
+	),
+	'opacity': (
+		property: opacity,
+		values: (
+			0: 0,
+			25: 0.25,
+			50: 0.5,
+			75: 0.75,
+			100: 1
+		)
+	),
+	'object-fit': (
+		responsive: true,
+		property: object-fit,
+		class: object,
+		values: (
+			contain: contain,
+			cover: cover,
+			fill: fill,
+			scale: scale-down,
+			none: none
+		)
+	),
+	// margin start
+	'margin': (
+			responsive: true,
+			property: margin,
+			class: m,
+			values: $spacing
+		),
+	'margin-top': (
+		responsive: true,
+		property: margin-block-start,
+		class: mt,
+		values: $spacing
+	),
+	'margin-bottom': (
+		responsive: true,
+		property: margin-block-end,
+		class: mb,
+		values: $spacing
+	),
+	'margin-right': (
+		responsive: true,
+		property: margin-inline-end,
+		class: me,
+		values: $spacing
+	),
+
+	'margin-left': (
+		responsive: true,
+		property: margin-inline-start,
+		class: ms,
+		values: $spacing
+	) // margin end
+);
+$utilities: map.merge($default-utilities, $utilities);

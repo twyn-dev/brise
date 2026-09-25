@@ -1,0 +1,16 @@
+@use '../abstracts' as *;
+@use 'sass:map';
+@use 'sass:meta';
+
+@each $breakpoint-key in map.keys($breakpoints) {
+	$breakpoint-prefix: get-breakpoint-prefix($breakpoint-key);
+
+	@include mq($breakpoint-key) {
+		@each $utility-key, $utility-map in $utilities {
+			@if meta.type-of($utility-map) == 'map' and (map.get($utility-map, responsive) or $breakpoint-prefix == '')
+			{
+				@include generate-utility($utility-key, $breakpoint-prefix, $utility-map);
+			}
+		}
+	}
+}

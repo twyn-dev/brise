@@ -120,11 +120,7 @@
 /// @param {Map} $colors - Flat color token map or map of color theme maps.
 /// @param {String|null} $theme - Theme key to omit because it is emitted by default.
 
-@mixin emit-color-theme-overrides(
-	$name,
-	$colors,
-	$theme: $default-color-theme
-) {
+@mixin emit-color-theme-overrides($name, $colors, $theme: $default-color-theme) {
 	$themes: normalize-color-themes($colors);
 
 	// Skip selector output when no color tokens were configured.
@@ -164,6 +160,29 @@
 	@each $key, $value in $map {
 		@if not list.index($exclude, $key) {
 			--#{namespace-prefix()}#{$name}-#{$key}: #{$value};
+		}
+	}
+}
+
+@mixin generate-utility($utility-key, $breakpoint-prefix, $utility-map) {
+	@if meta.type-of($utility-map) != 'map' {
+		@error "Utility `#{$utility-key}` must be a map, but got `#{meta.type-of($utility-map)}`.";
+	}
+
+	$property: require-key($utility-map, property, 'Utility `#{$utility-key}`');
+	$values: require-key($utility-map, values, 'Utility `#{$utility-key}`');
+	$values: normalize-values($values);
+	$class: map.get($utility-map, class);
+
+	@debug class $class;
+
+	$class: normalize-class($class, $property);
+
+	@debug breakpoint $breakpoint-prefix;
+
+	@each $value-key, $value in $values {
+		.#{$breakpoint-prefix}#{$class}-#{$value-key} {
+			#{$property}: #{$value};
 		}
 	}
 }
